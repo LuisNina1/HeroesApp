@@ -3,7 +3,7 @@ import { HeroesLayout } from "@/heroes/layouts/HeroesLayout";
 import { HeroesPage } from "@/heroes/pages/hero/HeroesPage";
 import { HomePage } from "@/heroes/pages/home/HomePage";
 import { lazy } from "react";
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 
 const SearchPage = lazy(() => import('@/heroes/pages/search/SearchPage'))
 const AdminPage = lazy(() => import('@/admin/pages/AdminPage'))
@@ -18,13 +18,17 @@ export const appRouter = createBrowserRouter([
         element: <HomePage></HomePage>
       },
       {
-        path: 'heroes/1',
+        path: 'heroes/:idSlug',
         element: <HeroesPage></HeroesPage>
       },
       {
         path: 'search',
         element: <SearchPage></SearchPage>
       },
+      {
+        path: '*',
+        element: <Navigate to="/"></Navigate>
+      }
 
     ]
   },

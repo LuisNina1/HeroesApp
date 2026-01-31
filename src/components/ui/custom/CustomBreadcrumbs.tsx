@@ -18,7 +18,9 @@ export const CustomBreadcrumbs = ({ currentPage, breadcrumbs = [] }: Props) => {
       <BreadcrumbList>
 
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbLink asChild>
+          <Link to="/">Home</Link>
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         {
