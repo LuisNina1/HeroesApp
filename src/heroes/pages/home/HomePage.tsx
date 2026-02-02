@@ -57,14 +57,14 @@ export const HomePage = () => {
           <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="all" onClick={() => setSearchParams((prev) => {
               prev.set('tab', 'all')
+              prev.set('category', 'all')
+              prev.set('page', '1')
               return prev
             })}
             >All Characters ({summaryResponse?.totalHeroes})</TabsTrigger>
             <TabsTrigger value="favorites" className="flex items-center gap-2"
               onClick={() => setSearchParams((prev) => {
                 prev.set('tab', 'favorites')
-                prev.set('category', 'all')
-                prev.set('page', '1')
                 return prev
               })}
             >
