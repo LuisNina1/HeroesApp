@@ -11,11 +11,14 @@ import { HeroGrid } from "@/heroes/componets/HeroGrid"
 import { CustomPagination } from "@/components/ui/custom/CustomPagination"
 import { CustomBreadcrumbs } from "@/components/ui/custom/CustomBreadcrumbs"
 import { useSearchParams } from "react-router"
-import { useMemo } from "react"
+import { use, useMemo } from "react"
 import { useHeroSummary } from "@/heroes/hooks/useHeroSummary"
 import { usePaginateHero } from "@/heroes/hooks/usePaginateHero"
+import { FavoriteHeroContext } from "@/heroes/context/FavoriteHeroContext"
 
 export const HomePage = () => {
+  const {favorites, favoritesCount} = use(FavoriteHeroContext)
+
   const [searchParams, setSearchParams] = useSearchParams()
 
   const activeTab = searchParams.get('tab') ?? 'all'
@@ -69,7 +72,7 @@ export const HomePage = () => {
               })}
             >
               <Heart className="h-4 w-4" />
-              Favorites (3)
+              Favorites ({favoritesCount})
             </TabsTrigger>
             <TabsTrigger value="heroes" onClick={() => setSearchParams((prev) => {
               prev.set('tab', 'heroes')
@@ -89,6 +92,10 @@ export const HomePage = () => {
           <TabsContent value="all">
             <h1>All characters</h1>
             <HeroGrid heroes={heroesResponse?.heroes ?? []}></HeroGrid>
+          </TabsContent>
+          <TabsContent value="favorites">
+            <h1>All characters</h1>
+            <HeroGrid heroes={favorites}></HeroGrid>
           </TabsContent>
           <TabsContent value="heroes">
             <h1>favorites</h1>
